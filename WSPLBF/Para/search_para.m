@@ -1,7 +1,7 @@
 
 function [bestParam] = search_para(Xtrain,ytrain,Xtest,ytest,net,AM,xi,w)
 
-%rdsvdd²ÎÊıÑ°ÓÅ
+
 
 % 
 gama= optimizableVariable('gama',  [0 100], 'Type', 'real');
@@ -10,16 +10,16 @@ psi=optimizableVariable('psi',  [0 10], 'Type', 'real');
 
 parameter = [gama,psi];
 
-% Ä¿±êº¯Êı
+% ç›®æ ‡å‡½æ•°
 objFun = @(parameter) fun(parameter,Xtrain,ytrain,Xtest,ytest,net,AM,xi,w);
 
-% ±´Ò¶Ë¹ÓÅ»¯
+% è´å¶æ–¯ä¼˜åŒ–
 iter = 30;
 points = 10;
 results = bayesopt(objFun, parameter, 'Verbose', 0, ...
                    'MaxObjectiveEvaluations', iter,...
                    'NumSeedPoints', points,'PlotFcn',[]);%
-               % ÓÅ»¯½á¹û
+               % ä¼˜åŒ–ç»“æœ
 [bestParam, ~, ~] = bestPoint(results, 'Criterion', 'min-observed');
 end
 
